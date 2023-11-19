@@ -16,7 +16,7 @@ public class PickUpController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact"))
+        if (Input.GetButtonDown("Interact") || Input.GetKey("b"))
         {
             if (heldObj == null)
             {
