@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class PickUpController : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class PickUpController : MonoBehaviour
     [SerializeField] Transform holdArea;
     private GameObject heldObj;
     private Rigidbody heldObjRB;
+    public LayerMask pickable;
+    private bool pickUpRC;
+    private RaycastHit hit;
+    private GameObject prevHit;
 
 
     [Header("Physics Parameters")]
@@ -16,12 +21,26 @@ public class PickUpController : MonoBehaviour
 
     private void Update()
     {
+        pickUpRC = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange, pickable);
+        if (pickUpRC && hit.transform.gameObject.GetComponent<Outline>() != null)
+        {
+            hit.transform.gameObject.GetComponent<Outline>().enabled = true;
+            if (prevHit != null && prevHit != hit.transform.gameObject)
+            {
+                prevHit.GetComponent<Outline>().enabled = false;
+            }
+            prevHit = hit.transform.gameObject;
+        }
+        if (!pickUpRC && prevHit != null)
+        {
+            prevHit.GetComponent<Outline>().enabled = false;
+        }
+
         if (Input.GetButtonDown("Interact") || Input.GetKey("b"))
         {
             if (heldObj == null)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, transform.TransformDirection (Vector3.forward), out hit, pickupRange))
+                if (pickUpRC)
                 {
                     PickupObject(hit.transform.gameObject);
                 }
