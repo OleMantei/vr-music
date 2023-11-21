@@ -1029,6 +1029,10 @@ PrefabInstance:
       value: Becken Links
       objectReference: {fileID: 0}
     - target: {fileID: 3684923613737598571, guid: f955b01da077b8140a8ae1fe14f0f29e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684923613737598571, guid: f955b01da077b8140a8ae1fe14f0f29e, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1097,6 +1101,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3684923613737598571, guid: f955b01da077b8140a8ae1fe14f0f29e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2043794754}
+    - targetCorrespondingSourceObject: {fileID: 3684923613737598571, guid: f955b01da077b8140a8ae1fe14f0f29e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2043794759}
     - targetCorrespondingSourceObject: {fileID: 5506770402750104132, guid: f955b01da077b8140a8ae1fe14f0f29e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 186752513}
@@ -1531,6 +1538,10 @@ PrefabInstance:
       value: Kick Drum
       objectReference: {fileID: 0}
     - target: {fileID: 8608873650905988573, guid: 14b4557aaba3c3349bb349605474ec0d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608873650905988573, guid: 14b4557aaba3c3349bb349605474ec0d, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1547,6 +1558,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8608873650905988573, guid: 14b4557aaba3c3349bb349605474ec0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1711853934}
+    - targetCorrespondingSourceObject: {fileID: 8608873650905988573, guid: 14b4557aaba3c3349bb349605474ec0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1711853938}
     - targetCorrespondingSourceObject: {fileID: 1929199950549722052, guid: 14b4557aaba3c3349bb349605474ec0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1029698014}
@@ -1732,6 +1746,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1329652044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1329652040}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.9547169, g: 0.5077027, b: 0.041431006, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!850595691 &1337461119
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -1861,6 +1893,10 @@ PrefabInstance:
       value: Breite Trommel
       objectReference: {fileID: 0}
     - target: {fileID: 7946959149061980107, guid: 574313be82510df4aa430dbe79797676, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946959149061980107, guid: 574313be82510df4aa430dbe79797676, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1877,6 +1913,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7946959149061980107, guid: 574313be82510df4aa430dbe79797676, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1329652041}
+    - targetCorrespondingSourceObject: {fileID: 7946959149061980107, guid: 574313be82510df4aa430dbe79797676, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1329652044}
     - targetCorrespondingSourceObject: {fileID: 6286097447748581322, guid: 574313be82510df4aa430dbe79797676, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1315634169}
@@ -1922,6 +1961,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holdArea: {fileID: 410700413}
+  pickable:
+    serializedVersion: 2
+    m_Bits: 8
   pickupRange: 5
   pickupForce: 150
 --- !u!1 &1494607778
@@ -2379,6 +2421,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 68.184204, y: 66.9899, z: 63.897003}
   m_Center: {x: 10.524099, y: -39.554848, z: 91.7463}
+--- !u!114 &1711853938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711853928}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.97735846, g: 0.63005227, b: 0, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1840661963
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,6 +3180,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 41.330902, y: 22.9138, z: 41.746296}
   m_Center: {x: 43.57585, y: 53.810898, z: 79.51065}
+--- !u!114 &2043794759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043794749}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.97735846, g: 0.632769, b: 0.04978988, a: 1}
+  outlineWidth: 8
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2094372658
 GameObject:
   m_ObjectHideFlags: 0
