@@ -404,8 +404,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3270816504831535192, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
-      insertIndex: -1
+    - targetCorrespondingSourceObject: {fileID: 4010490190010514662, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
+      insertIndex: 0
       addedObject: {fileID: 410700413}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4374804947525976064, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
@@ -559,12 +559,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410700412}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.338, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1491570231}
+  m_Father: {fileID: 1466439272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &636116923
 GameObject:
@@ -1744,7 +1744,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1329652044
 MonoBehaviour:
@@ -1828,6 +1828,11 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
+--- !u!4 &1466439272 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4010490190010514662, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
+  m_PrefabInstance: {fileID: 319050684}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1481320521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1943,11 +1948,6 @@ MonoBehaviour:
   m_TrackingType: 0
   m_UpdateType: 0
   m_UseRelativeTransform: 0
---- !u!4 &1491570231 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3270816504831535192, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
-  m_PrefabInstance: {fileID: 319050684}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1491570235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2398,7 +2398,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!65 &1711853934
 BoxCollider:
@@ -3157,7 +3157,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &2043794755
 BoxCollider:

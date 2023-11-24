@@ -18,23 +18,28 @@ public class PickUpController : MonoBehaviour
     [Header("Physics Parameters")]
     [SerializeField] private float pickupRange = 5.0f;
     [SerializeField] private float pickupForce = 150.0f;
+    private float objY;
 
     private void Update()
     {
         pickUpRC = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange, pickable);
-        if (pickUpRC && hit.transform.gameObject.GetComponent<Outline>() != null)
+        if (heldObj == null)
         {
-            hit.transform.gameObject.GetComponent<Outline>().enabled = true;
-            if (prevHit != null && prevHit != hit.transform.gameObject)
+            if (pickUpRC && hit.transform.gameObject.GetComponent<Outline>() != null)
+            {
+                hit.transform.gameObject.GetComponent<Outline>().enabled = true;
+                if (prevHit != null && prevHit != hit.transform.gameObject)
+                {
+                    prevHit.GetComponent<Outline>().enabled = false;
+                }
+                prevHit = hit.transform.gameObject;
+            }
+            if (!pickUpRC && prevHit != null)
             {
                 prevHit.GetComponent<Outline>().enabled = false;
             }
-            prevHit = hit.transform.gameObject;
         }
-        if (!pickUpRC && prevHit != null)
-        {
-            prevHit.GetComponent<Outline>().enabled = false;
-        }
+        
 
         if (Input.GetButtonDown("Interact") || Input.GetKey("b"))
         {
@@ -70,9 +75,10 @@ public class PickUpController : MonoBehaviour
         if (pickObj.GetComponent<Rigidbody>())
         {
             heldObjRB = pickObj.GetComponent<Rigidbody>();
+            objY = heldObjRB.position.y;
             heldObjRB.useGravity = false;
             heldObjRB.drag = 10;
-            heldObjRB.constraints = RigidbodyConstraints.FreezeRotation;
+            heldObjRB.constraints &= ~RigidbodyConstraints.FreezePositionY;
 
             heldObjRB.transform.parent = holdArea;
             heldObj = pickObj;
@@ -83,7 +89,10 @@ public class PickUpController : MonoBehaviour
     {
         heldObjRB.useGravity = true;
         heldObjRB.drag = 1;
-        heldObjRB.constraints = RigidbodyConstraints.None;
+        Vector3 position = transform.position;
+        position.y = objY;
+        heldObjRB.transform.position = position;
+        heldObjRB.constraints = RigidbodyConstraints.FreezeAll;
 
         heldObj.transform.parent = null;
         heldObj = null;
