@@ -59,6 +59,15 @@ public class PickUpController : MonoBehaviour
         {
             MoveObject();
         }
+        if (Input.GetButtonDown("Store"))
+        {
+            if (pickUpRC)
+            {
+                Rigidbody objBody = hit.transform.gameObject.GetComponent<Rigidbody>();
+                Vector3 scaleChange = new Vector3(-0.015f, -0.015f, -0.015f);
+                objBody.transform.localScale += scaleChange;
+            }
+        }
     }
 
     void MoveObject()
