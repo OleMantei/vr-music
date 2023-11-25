@@ -64,8 +64,9 @@ public class PickUpController : MonoBehaviour
             if (pickUpRC)
             {
                 Rigidbody objBody = hit.transform.gameObject.GetComponent<Rigidbody>();
-                Vector3 scaleChange = new Vector3(-0.015f, -0.015f, -0.015f);
-                objBody.transform.localScale += scaleChange;
+                Vector3 position = transform.position;
+                position.z = 20;
+                objBody.transform.position += position;
             }
         }
     }

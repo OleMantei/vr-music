@@ -6,6 +6,7 @@ public class Shelf : MonoBehaviour
 {
     public List<Item> shelfItems = new List<Item>();
     public ItemDatabase itemDatabase;
+    public UIShelf shelfUI;
 
     public void Start()
     {
@@ -18,6 +19,7 @@ public class Shelf : MonoBehaviour
     {
         Item itemToAdd = itemDatabase.GetItem(id);
         shelfItems.Add(itemToAdd);
+        shelfUI.AddNewItem(itemToAdd);
         Debug.Log("Added item: " + itemToAdd.title);
     }
 
@@ -28,11 +30,12 @@ public class Shelf : MonoBehaviour
 
     public void RemoveItem(int id)
     {
-        Item item = CheckForItem(id);
-        if (item != null)
+        Item itemToRemove = CheckForItem(id);
+        if (itemToRemove != null)
         {
-            shelfItems.Remove(item);
-            Debug.Log("Item removed: " + item.title);
+            shelfItems.Remove(itemToRemove);
+            shelfUI.RemoveItem(itemToRemove);
+            Debug.Log("Item removed: " + itemToRemove.title);
         }
     }
 }
