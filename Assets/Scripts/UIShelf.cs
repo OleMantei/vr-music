@@ -13,10 +13,10 @@ public class UIShelf : MonoBehaviour
     {
         for (int i = 0; i < numbersOfSlots; i++)
         {
-            GameObject instance = Instantiate(slotPrefab);
-            instance.transform.SetParent(slotPanel);
+            GameObject instance = Instantiate(slotPrefab, slotPanel);
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
         }
+        Debug.Log(uIItems);
     }
 
     public void UpdateSlot(int slot, Item item)

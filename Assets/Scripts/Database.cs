@@ -15,6 +15,11 @@ public class ItemDatabase : MonoBehaviour
         return items.Find(item => item.id == id);
     }
 
+    public Item GetItem(string title)
+    {
+        return items.Find(item => item.title == title);
+    }
+
     void BuildDatabase()
     {
         items = new List<Item>() {

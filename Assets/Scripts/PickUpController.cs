@@ -13,6 +13,7 @@ public class PickUpController : MonoBehaviour
     private bool pickUpRC;
     private RaycastHit hit;
     private GameObject prevHit;
+    public Shelf shelf;
 
 
     [Header("Physics Parameters")]
@@ -63,10 +64,9 @@ public class PickUpController : MonoBehaviour
         {
             if (pickUpRC)
             {
+                shelf.GiveItem(hit.transform.gameObject.name);
                 Rigidbody objBody = hit.transform.gameObject.GetComponent<Rigidbody>();
-                Vector3 position = transform.position;
-                position.z = 20;
-                objBody.transform.position += position;
+                objBody.transform.position = new Vector3(objBody.transform.position.x, objBody.transform.position.y, objBody.transform.position.z - 300);
             }
         }
     }
@@ -99,9 +99,7 @@ public class PickUpController : MonoBehaviour
     {
         heldObjRB.useGravity = true;
         heldObjRB.drag = 1;
-        Vector3 position = transform.position;
-        position.y = objY;
-        heldObjRB.transform.position = position;
+        heldObjRB.transform.position = new Vector3(heldObjRB.transform.position.x, objY, heldObjRB.transform.position.z);
         heldObjRB.constraints = RigidbodyConstraints.FreezeAll;
 
         heldObj.transform.parent = null;

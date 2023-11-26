@@ -4,17 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIItem : MonoBehaviour
+public class UIItem : MonoBehaviour, IPointerClickHandler
 {
     public Item item;
     private Image spriteImage;
-    private UIItem selectedItem;
 
     private void Awake()
     {
         spriteImage = GetComponent<Image>();
         UpdateItem(null);
-        selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
     }
 
     public void UpdateItem(Item item)
@@ -31,5 +29,8 @@ public class UIItem : MonoBehaviour
         }
     }
 
-    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Test");
+    }
 }

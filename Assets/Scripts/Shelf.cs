@@ -10,10 +10,9 @@ public class Shelf : MonoBehaviour
 
     public void Start()
     {
-        GiveItem(0);
-        GiveItem(1);
-        GiveItem(2);
-        RemoveItem(1);
+        //GiveItem("Snare");
+        //GiveItem("Hihat");
+        //GiveItem("Bassdrum");
     }
     public void GiveItem(int id)
     {
@@ -23,14 +22,36 @@ public class Shelf : MonoBehaviour
         Debug.Log("Added item: " + itemToAdd.title);
     }
 
+    public void GiveItem(string title)
+    {
+        Item itemToAdd = itemDatabase.GetItem(title);
+        shelfItems.Add(itemToAdd);
+        shelfUI.AddNewItem(itemToAdd);
+        Debug.Log("Added item: " + itemToAdd.title);
+    }
+
     public Item CheckForItem(int id)
     {
         return shelfItems.Find(item => item.id == id);
+    }
+    public Item CheckForItem(string title)
+    {
+        return shelfItems.Find(item => item.title == title);
     }
 
     public void RemoveItem(int id)
     {
         Item itemToRemove = CheckForItem(id);
+        if (itemToRemove != null)
+        {
+            shelfItems.Remove(itemToRemove);
+            shelfUI.RemoveItem(itemToRemove);
+            Debug.Log("Item removed: " + itemToRemove.title);
+        }
+    }
+    public void RemoveItem(string title)
+    {
+        Item itemToRemove = CheckForItem(title);
         if (itemToRemove != null)
         {
             shelfItems.Remove(itemToRemove);
