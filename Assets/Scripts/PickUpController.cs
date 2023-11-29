@@ -66,7 +66,9 @@ public class PickUpController : MonoBehaviour
             {
                 shelf.GiveItem(hit.transform.gameObject.name);
                 Rigidbody objBody = hit.transform.gameObject.GetComponent<Rigidbody>();
+                AudioSource objAudio = hit.transform.gameObject.GetComponent<AudioSource>();
                 objBody.transform.position = new Vector3(objBody.transform.position.x, objBody.transform.position.y, objBody.transform.position.z - 300);
+                objAudio.mute = true;
             }
         }
     }
@@ -104,6 +106,5 @@ public class PickUpController : MonoBehaviour
 
         heldObj.transform.parent = null;
         heldObj = null;
-
     }
 }
