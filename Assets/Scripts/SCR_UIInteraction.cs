@@ -46,8 +46,9 @@ public class SCR_UIInteraction : MonoBehaviour
                 string nameItem = ui_element.GetComponent<Image>().sprite.name;
                 shelf.RemoveItem(nameItem);
                 Rigidbody objBody = GameObject.Find(nameItem).transform.gameObject.GetComponent<Rigidbody>();
+                AudioSource objAudio = GameObject.Find(nameItem).transform.gameObject.GetComponent<AudioSource>();
                 objBody.transform.position = new Vector3(objBody.transform.position.x, objBody.transform.position.y, objBody.transform.position.z + 300);
-
+                objAudio.mute = false;
             }
         }
     }
