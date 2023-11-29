@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LookAtObject : MonoBehaviour
 {
-    [SerializeField] GameObject _object;
+    public Camera mainCamera;
 
     void Start()
     {
@@ -14,6 +14,11 @@ public class LookAtObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.LookRotation(transform.position - _object.transform.position);
+        transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
+    }
+
+    void GiveObject(Camera camera)
+    {
+        mainCamera = camera;
     }
 }

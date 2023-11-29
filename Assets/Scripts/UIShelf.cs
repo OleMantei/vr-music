@@ -8,13 +8,17 @@ public class UIShelf : MonoBehaviour
     public GameObject slotPrefab;
     public Transform slotPanel;
     public int numbersOfSlots = 12;
+    public LookAtObject lookAt;
 
     private void Awake()
     {
+        Camera m_MainCamera;
+        m_MainCamera = Camera.main;
         for (int i = 0; i < numbersOfSlots; i++)
         {
             GameObject instance = Instantiate(slotPrefab, slotPanel);
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
+            instance.AddComponent<LookAtObject>().mainCamera = m_MainCamera;
         }
         Debug.Log(uIItems);
     }
