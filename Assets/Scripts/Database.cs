@@ -39,7 +39,7 @@ public class ItemDatabase : MonoBehaviour
                 new Item(13, "lead_guitar_rock_1"),
                 new Item(14, "lead_guitar_rock_2"),
                 new Item(15, "bass"),
-                new Item(16, "mic"),
+                new Item(16, "microphone"),
                 };
     }
 }
