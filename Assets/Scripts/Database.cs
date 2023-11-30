@@ -23,19 +23,23 @@ public class ItemDatabase : MonoBehaviour
     void BuildDatabase()
     {
         items = new List<Item>() {
-                new Item(0, "Snare"),
-                new Item(1, "Hihat"),
-                new Item(2, "Bassdrum"),
-                new Item(3, "Kick"),
-                new Item(4, "Crash"),
-                new Item(5, "RhythmGuitarMetal1"),
-                new Item(6, "RhythmGuitarMetal2"),
-                new Item(7, "LeadGuitarMetal1"),
-                new Item(8, "LeadGuitarMetal2"),
-                new Item(9, "BassGuitarMetal"),
-                new Item(10, "Keys"),
-                new Item(11, "Vox"),
-                new Item(10, "Toms")
+                new Item(0, "kick"),
+                new Item(1, "snare"),
+                new Item(2, "hihat"),
+                new Item(3, "toms"),
+                new Item(4, "crash"),
+                new Item(5, "ride"),
+                new Item(6, "keys"),
+                new Item(7, "rh_guitar_metal_1"),
+                new Item(8, "rh_guitar_metal_2"),
+                new Item(9, "lead_guitar_metal_1"),
+                new Item(10, "lead_guitar_metal_2"),
+                new Item(11, "rh_guitar_rock_1"),
+                new Item(12, "rh_guitar_rock_2"),
+                new Item(13, "lead_guitar_rock_1"),
+                new Item(14, "lead_guitar_rock_2"),
+                new Item(15, "bass"),
+                new Item(16, "mic"),
                 };
     }
 }
