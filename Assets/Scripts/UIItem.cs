@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class UIItem : MonoBehaviour, IPointerClickHandler
+public class UIItem : MonoBehaviour
 {
     public Item item;
     private Image spriteImage;
@@ -27,10 +28,5 @@ public class UIItem : MonoBehaviour, IPointerClickHandler
         {
             spriteImage.color = Color.clear;
         }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Test");
     }
 }

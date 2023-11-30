@@ -60,7 +60,7 @@ public class PickUpController : MonoBehaviour
         {
             MoveObject();
         }
-        if (Input.GetButtonDown("Store"))
+        else if (Input.GetButtonDown("Store"))
         {
             if (pickUpRC)
             {
