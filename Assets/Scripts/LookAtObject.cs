@@ -16,9 +16,4 @@ public class LookAtObject : MonoBehaviour
     {
         transform.rotation = Quaternion.LookRotation(transform.position - mainCamera.transform.position);
     }
-
-    void GiveObject(Camera camera)
-    {
-        mainCamera = camera;
-    }
 }
