@@ -41,7 +41,7 @@ public class SCR_UIInteraction : MonoBehaviour
         foreach (RaycastResult result in click_results)
         {
             GameObject ui_element = result.gameObject;
-            if (ui_element.GetComponent<Image>().sprite != null)
+            if (ui_element.name == "Item")
             {
                 string nameItem = ui_element.GetComponent<Image>().sprite.name;
                 shelf.RemoveItem(nameItem);

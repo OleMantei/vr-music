@@ -9,7 +9,7 @@ public class PickUpController : MonoBehaviour
     [SerializeField] Transform holdArea;
     private GameObject heldObj;
     private Rigidbody heldObjRB;
-    public LayerMask pickable;
+    public LayerMask interactible;
     private bool pickUpRC;
     private RaycastHit hit;
     private GameObject prevHit;
@@ -23,7 +23,7 @@ public class PickUpController : MonoBehaviour
 
     private void Update()
     {
-        pickUpRC = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange, pickable);
+        pickUpRC = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange, interactible);
         if (heldObj == null)
         {
             if (pickUpRC && hit.transform.gameObject.GetComponent<Outline>() != null)
@@ -48,7 +48,37 @@ public class PickUpController : MonoBehaviour
             {
                 if (pickUpRC)
                 {
-                    PickupObject(hit.transform.gameObject);
+                    if (hit.transform.gameObject.layer == 3)
+                    {
+                        PickupObject(hit.transform.gameObject);
+                    }
+                    else if (hit.transform.gameObject.layer == 6)
+                    {
+                        GameObject headphonesStand = hit.transform.gameObject;
+                        GameObject headphones = headphonesStand.transform.GetChild(0).gameObject;
+                        MeshRenderer headphonesMesh = headphones.GetComponentInChildren<MeshRenderer>();
+                        if (headphonesMesh.enabled)
+                        {
+                            AudioListener listenerPlayer = GameObject.Find("FirstPersonCamera").GetComponent<AudioListener>();
+                            AudioListener listenerMic = GameObject.Find("MicListener").GetComponent<AudioListener>();
+                            Canvas headphonesUI = GameObject.Find("Headphones_Canvas").GetComponent<Canvas>();
+                            listenerPlayer.enabled = false;
+                            listenerMic.enabled = true;
+                            headphonesUI.enabled = true;
+                            headphonesMesh.enabled = false;
+                        }
+                        else
+                        {
+                            AudioListener listenerPlayer = GameObject.Find("FirstPersonCamera").GetComponent<AudioListener>();
+                            AudioListener listenerMic = GameObject.Find("MicListener").GetComponent<AudioListener>();
+                            Canvas headphonesUI = GameObject.Find("Headphones_Canvas").GetComponent<Canvas>();
+                            listenerPlayer.enabled = true;
+                            listenerMic.enabled = false;
+                            headphonesUI.enabled = false;
+                            headphonesMesh.enabled = true;
+                        }
+                        
+                    }
                 }
             }
             else
@@ -64,11 +94,7 @@ public class PickUpController : MonoBehaviour
         {
             if (pickUpRC)
             {
-                shelf.GiveItem(hit.transform.gameObject.name);
-                Rigidbody objBody = hit.transform.gameObject.GetComponent<Rigidbody>();
-                AudioSource objAudio = hit.transform.gameObject.GetComponentInChildren<AudioSource>();
-                objBody.transform.position = new Vector3(objBody.transform.position.x, objBody.transform.position.y, objBody.transform.position.z - 300);
-                objAudio.mute = true;
+                StoreObject(hit.transform.gameObject);
             }
         }
     }
@@ -80,6 +106,15 @@ public class PickUpController : MonoBehaviour
             Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
             heldObjRB.AddForce(moveDirection * pickupForce);
         }
+    }
+
+    void StoreObject(GameObject objToStore)
+    {
+        shelf.GiveItem(objToStore.name);
+        Rigidbody objBody = objToStore.GetComponent<Rigidbody>();
+        AudioSource objAudio = objToStore.GetComponentInChildren<AudioSource>();
+        objBody.transform.position = new Vector3(objBody.transform.position.x, objBody.transform.position.y, objBody.transform.position.z - 300);
+        objAudio.mute = true;
     }
 
     void PickupObject(GameObject pickObj)

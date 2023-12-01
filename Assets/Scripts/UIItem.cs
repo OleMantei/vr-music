@@ -22,11 +22,13 @@ public class UIItem : MonoBehaviour
         if (this.item != null)
         {
             spriteImage.color = Color.white;
-            spriteImage.sprite = this.item.icon;
+            spriteImage.sprite = this.item.icon; 
+            spriteImage.transform.GetChild(0).GetComponent<TMP_Text>().text = this.item.icon.name;
         }
         else
         {
             spriteImage.color = Color.clear;
+            spriteImage.transform.GetChild(0).GetComponent<TMP_Text>().text = "";
         }
     }
 }

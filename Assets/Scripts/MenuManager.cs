@@ -11,10 +11,18 @@ public class MenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Pause"))
         {
             gameIsPaused = !gameIsPaused;
             PauseGame();
+        }
+        if (Input.GetKeyDown("r"))
+        {
+            RestartGame();
+        }
+        if (Input.GetKeyDown("q"))
+        {
+            ExitGame();
         }
     }
 
@@ -22,14 +30,11 @@ public class MenuManager : MonoBehaviour
     {
         if (gameIsPaused)
         {
-            Time.timeScale = 0;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+
         }
         else
         {
-            Cursor.visible = false;
-            Time.timeScale = 1;
+
         }
     }
 
