@@ -15,9 +15,9 @@ public class ShowHideCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Paus"))
+        if (Input.GetButtonDown("Pause"))
         {
-            menuSystem.enabled = !menuSystem.enabled;
+            //menuSystem.enabled = !menuSystem.enabled;
         }
     }
 }
