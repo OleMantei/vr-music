@@ -111,10 +111,20 @@ public class PickUpController : MonoBehaviour
     void StoreObject(GameObject objToStore)
     {
         shelf.GiveItem(objToStore.name);
-        Rigidbody objBody = objToStore.GetComponent<Rigidbody>();
+        objToStore.GetComponent<MeshRenderer>().enabled = false;
+        objToStore.GetComponent<Rigidbody>().isKinematic = false;
+        objToStore.GetComponent<MeshCollider>().enabled = false;
         AudioSource objAudio = objToStore.GetComponentInChildren<AudioSource>();
-        objBody.transform.position = new Vector3(objBody.transform.position.x, objBody.transform.position.y, objBody.transform.position.z - 300);
         objAudio.mute = true;
+        if (objToStore.transform.childCount > 1)
+        {
+            for (int i = 1; i < objToStore.transform.childCount; i++)
+            {
+                GameObject stand = objToStore.transform.GetChild(i).gameObject;
+                stand.GetComponent<MeshRenderer>().enabled = false;
+                stand.GetComponent<MeshCollider>().enabled = false;
+            }
+        }
     }
 
     void PickupObject(GameObject pickObj)

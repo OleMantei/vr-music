@@ -15,13 +15,13 @@ public class ChangeRoom : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().name == "MainRoom")
                 {
-                    Debug.Log("Teleport to SecondRoom");
                     SceneManager.LoadScene("SecondRoom");
+                    Debug.Log("Teleport to SecondRoom");
                 }
                 else if (SceneManager.GetActiveScene().name == "SecondRoom")
                 {
-                    Debug.Log("Teleport to MainRoom");
                     SceneManager.LoadScene("MainRoom");
+                    Debug.Log("Teleport to MainRoom");
                 }
             } 
         } 

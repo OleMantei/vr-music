@@ -33,7 +33,7 @@ public class SCR_UIInteraction : MonoBehaviour
 
     void GetUiElementsClicked()
     {
-        //click_data.position = Mouse.current.position.ReadValue();
+        click_data.position = Mouse.current.position.ReadValue();
         
         //RaycastHit hit;
         //if (Physics.Raycast(Camera.main.transform.position, Vector3.forward, out hit))
@@ -42,8 +42,8 @@ public class SCR_UIInteraction : MonoBehaviour
         //    click_data.position = point;
         //}
 
-        Vector2 point = new Vector2(Screen.width / 2, Screen.height / 2);
-        click_data.position = point;
+        //Vector2 point = new Vector2(Screen.width / 2, Screen.height / 2);
+        //click_data.position = point;
 
         click_results.Clear();
         ui_raycaster.Raycast(click_data, click_results);
@@ -55,10 +55,21 @@ public class SCR_UIInteraction : MonoBehaviour
             {
                 string nameItem = ui_element.GetComponent<Image>().sprite.name;
                 shelf.RemoveItem(nameItem);
-                Rigidbody objBody = GameObject.Find(nameItem).transform.gameObject.GetComponent<Rigidbody>();
-                AudioSource objAudio = GameObject.Find(nameItem).transform.gameObject.GetComponentInChildren<AudioSource>();
-                objBody.transform.position = new Vector3(objBody.transform.position.x, objBody.transform.position.y, objBody.transform.position.z + 300);
+                GameObject instrument = GameObject.Find(nameItem).transform.gameObject;
+                instrument.GetComponent<MeshRenderer>().enabled = true;
+                instrument.GetComponent<Rigidbody>().isKinematic = true;
+                instrument.GetComponent<MeshCollider>().enabled = true;
+                AudioSource objAudio = instrument.GetComponentInChildren<AudioSource>();
                 objAudio.mute = false;
+                if (instrument.transform.childCount > 1)
+                {
+                    for (int i = 1; i < instrument.transform.childCount; i++)
+                    {
+                        GameObject stand = instrument.transform.GetChild(i).gameObject;
+                        stand.GetComponent<MeshRenderer>().enabled = true;
+                        stand.GetComponent<MeshCollider>().enabled = true;
+                    }
+                }
             }
         }
     }
