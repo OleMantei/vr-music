@@ -25,7 +25,7 @@ public class SCR_UIInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.leftButton.wasReleasedThisFrame || Input.GetButtonUp("Interact"))
         {
             GetUiElementsClicked();
         }
@@ -33,9 +33,19 @@ public class SCR_UIInteraction : MonoBehaviour
 
     void GetUiElementsClicked()
     {
-        click_data.position = Mouse.current.position.ReadValue();
-        click_results.Clear();
+        //click_data.position = Mouse.current.position.ReadValue();
+        
+        //RaycastHit hit;
+        //if (Physics.Raycast(Camera.main.transform.position, Vector3.forward, out hit))
+        //{
+        //    Vector2 point = Camera.main.WorldToScreenPoint(hit.point);
+        //    click_data.position = point;
+        //}
 
+        Vector2 point = new Vector2(Screen.width / 2, Screen.height / 2);
+        click_data.position = point;
+
+        click_results.Clear();
         ui_raycaster.Raycast(click_data, click_results);
 
         foreach (RaycastResult result in click_results)

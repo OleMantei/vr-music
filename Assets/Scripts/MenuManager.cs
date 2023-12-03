@@ -16,7 +16,7 @@ public class MenuManager : MonoBehaviour
             gameIsPaused = !gameIsPaused;
             PauseGame();
         }
-        if (Input.GetKeyDown("r"))
+        if (Input.GetKeyDown("r") || Input.GetButtonDown("Joystick Button 12"))
         {
             RestartGame();
         }
