@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
+using UnityEngine.UI;
 
 public class PickUpController : MonoBehaviour
 {
@@ -10,20 +11,26 @@ public class PickUpController : MonoBehaviour
     private GameObject heldObj;
     private Rigidbody heldObjRB;
     public LayerMask interactible;
+    public LayerMask UIinteractible;
     private bool pickUpRC;
+    private bool UIRC;
     private RaycastHit hit;
+    private RaycastHit UIhit;
     private GameObject prevHit;
     public Shelf shelf;
 
 
     [Header("Physics Parameters")]
     [SerializeField] private float pickupRange = 5.0f;
+    [SerializeField] private float UIRange = 50.0f;
     [SerializeField] private float pickupForce = 150.0f;
     private float objY;
 
     private void Update()
     {
         pickUpRC = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange, interactible);
+        UIRC = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out UIhit, UIRange, UIinteractible);
+
         if (heldObj == null)
         {
             if (pickUpRC && hit.transform.gameObject.GetComponent<Outline>() != null)
@@ -46,6 +53,31 @@ public class PickUpController : MonoBehaviour
         {
             if (heldObj == null)
             {
+                if (UIRC)
+                {
+                    GameObject ui_element = UIhit.transform.gameObject;
+                    if (ui_element.name == "Item")
+                    {
+                        ui_element.GetComponent<Image>();
+                        string nameItem = ui_element.GetComponent<Image>().sprite.name;
+                        shelf.RemoveItem(nameItem);
+                        GameObject instrument = GameObject.Find(nameItem).transform.gameObject;
+                        instrument.GetComponent<MeshRenderer>().enabled = true;
+                        instrument.GetComponent<Rigidbody>().isKinematic = true;
+                        instrument.GetComponent<MeshCollider>().enabled = true;
+                        AudioSource objAudio = instrument.GetComponentInChildren<AudioSource>();
+                        objAudio.mute = false;
+                        if (instrument.transform.childCount > 1)
+                        {
+                            for (int i = 1; i < instrument.transform.childCount; i++)
+                            {
+                                GameObject stand = instrument.transform.GetChild(i).gameObject;
+                                stand.GetComponent<MeshRenderer>().enabled = true;
+                                stand.GetComponent<MeshCollider>().enabled = true;
+                            }
+                        }
+                    }
+                }
                 if (pickUpRC)
                 {
                     if (hit.transform.gameObject.layer == 3)

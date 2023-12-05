@@ -27,20 +27,21 @@ public class SCR_UIInteraction : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasReleasedThisFrame || Input.GetButtonUp("Interact"))
         {
-            GetUiElementsClicked();
+            //GetUiElementsClicked();
         }
     }
 
     void GetUiElementsClicked()
     {
-        click_data.position = Mouse.current.position.ReadValue();
+        //click_data.position = Mouse.current.position.ReadValue();
         
-        //RaycastHit hit;
-        //if (Physics.Raycast(Camera.main.transform.position, Vector3.forward, out hit))
-        //{
-        //    Vector2 point = Camera.main.WorldToScreenPoint(hit.point);
-        //    click_data.position = point;
-        //}
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.transform.position, Vector3.forward, out hit))
+        {
+            Vector2 point = Camera.main.WorldToScreenPoint(hit.point);
+            click_data.position = point;
+            Debug.Log(click_data.position);
+        }
 
         //Vector2 point = new Vector2(Screen.width / 2, Screen.height / 2);
         //click_data.position = point;
