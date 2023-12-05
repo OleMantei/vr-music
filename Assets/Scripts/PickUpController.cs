@@ -93,7 +93,7 @@ public class PickUpController : MonoBehaviour
                         {
                             ChangeSong();
                         }
-                        else if (hit.transform.gameObject.name == "Door_Main")
+                        else if (hit.transform.gameObject.name == "Door_Main"|| hit.transform.gameObject.name == "doorWing")
                         {
                             Debug.Log("Test");
                             Application.Quit();
