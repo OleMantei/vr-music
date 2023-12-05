@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))// || Input.GetKey("options") || Input.GetKey("settings") || Input.GetKey("a"))
+        if (Input.GetKeyDown("x"))
         {
             if (GamePaused)
             {
@@ -24,12 +24,12 @@ public class PauseMenu : MonoBehaviour
 
         if (GamePaused)
         {
-            if (Input.GetKeyDown("r"))//Reload"))
+            if (Input.GetKeyDown("a"))//Reload"))
             {
                 ReLoadScene();
             }
 
-            if (Input.GetKeyDown("q"))//Cancel"))
+            if (Input.GetKeyDown("y"))//Cancel"))
             {
                 QuitGame();
             }
@@ -52,15 +52,11 @@ public class PauseMenu : MonoBehaviour
     void Pause()
     {
         PauseMenuUI.SetActive(true);
-        //Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.Confined;
         GamePaused = true;
     }
 
     public void ReLoadScene()
     {
-        //Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
