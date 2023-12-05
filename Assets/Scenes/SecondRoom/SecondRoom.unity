@@ -4812,7 +4812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4528484804892279070, guid: 74ba1e00e59199440a3ab3e47ecb50f3, type: 3}
       propertyPath: m_Name
-      value: SmallTable
+      value: Headphones
       objectReference: {fileID: 0}
     - target: {fileID: 4528484804892279070, guid: 74ba1e00e59199440a3ab3e47ecb50f3, type: 3}
       propertyPath: m_Layer
@@ -11471,6 +11471,8 @@ MonoBehaviour:
   pickupRange: 5
   UIRange: 50
   pickupForce: 150
+  currentSong: 0
+  nbSongs: 0
 --- !u!20 &1491570239 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2849049741990048792, guid: f6af6b8647f7e274f8f5f015a1d0fd9d, type: 3}
