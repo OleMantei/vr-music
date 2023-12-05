@@ -1,8 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.XR;
 
 public class PickUpController : MonoBehaviour
 {
@@ -18,6 +23,7 @@ public class PickUpController : MonoBehaviour
     private RaycastHit UIhit;
     private GameObject prevHit;
     public Shelf shelf;
+    AudioSource[] sources;
 
 
     [Header("Physics Parameters")]
@@ -25,6 +31,14 @@ public class PickUpController : MonoBehaviour
     [SerializeField] private float UIRange = 50.0f;
     [SerializeField] private float pickupForce = 150.0f;
     private float objY;
+    public System.Int32 currentSong;
+    public System.Int32 nbSongs;
+
+    void Start()
+    {
+        sources = GameObject.FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+        ChangeSong();
+    }
 
     private void Update()
     {
@@ -58,24 +72,9 @@ public class PickUpController : MonoBehaviour
                     GameObject ui_element = UIhit.transform.gameObject;
                     if (ui_element.name == "Item")
                     {
-                        ui_element.GetComponent<Image>();
                         string nameItem = ui_element.GetComponent<Image>().sprite.name;
                         shelf.RemoveItem(nameItem);
-                        GameObject instrument = GameObject.Find(nameItem).transform.gameObject;
-                        instrument.GetComponent<MeshRenderer>().enabled = true;
-                        instrument.GetComponent<Rigidbody>().isKinematic = true;
-                        instrument.GetComponent<MeshCollider>().enabled = true;
-                        AudioSource objAudio = instrument.GetComponentInChildren<AudioSource>();
-                        objAudio.mute = false;
-                        if (instrument.transform.childCount > 1)
-                        {
-                            for (int i = 1; i < instrument.transform.childCount; i++)
-                            {
-                                GameObject stand = instrument.transform.GetChild(i).gameObject;
-                                stand.GetComponent<MeshRenderer>().enabled = true;
-                                stand.GetComponent<MeshCollider>().enabled = true;
-                            }
-                        }
+                        ShowObject(GameObject.Find(nameItem).transform.gameObject, true);
                     }
                 }
                 if (pickUpRC)
@@ -86,30 +85,14 @@ public class PickUpController : MonoBehaviour
                     }
                     else if (hit.transform.gameObject.layer == 6)
                     {
-                        GameObject headphonesStand = hit.transform.gameObject;
-                        GameObject headphones = headphonesStand.transform.GetChild(0).gameObject;
-                        MeshRenderer headphonesMesh = headphones.GetComponentInChildren<MeshRenderer>();
-                        if (headphonesMesh.enabled)
+                        if (hit.transform.gameObject.name == "Headphones")
                         {
-                            AudioListener listenerPlayer = GameObject.Find("FirstPersonCamera").GetComponent<AudioListener>();
-                            AudioListener listenerMic = GameObject.Find("MicListener").GetComponent<AudioListener>();
-                            Canvas headphonesUI = GameObject.Find("Headphones_Canvas").GetComponent<Canvas>();
-                            listenerPlayer.enabled = false;
-                            listenerMic.enabled = true;
-                            headphonesUI.enabled = true;
-                            headphonesMesh.enabled = false;
+                            HeadphonesInteract(hit.transform.gameObject);
                         }
-                        else
+                        else if (hit.transform.gameObject.name == "Jukebox")
                         {
-                            AudioListener listenerPlayer = GameObject.Find("FirstPersonCamera").GetComponent<AudioListener>();
-                            AudioListener listenerMic = GameObject.Find("MicListener").GetComponent<AudioListener>();
-                            Canvas headphonesUI = GameObject.Find("Headphones_Canvas").GetComponent<Canvas>();
-                            listenerPlayer.enabled = true;
-                            listenerMic.enabled = false;
-                            headphonesUI.enabled = false;
-                            headphonesMesh.enabled = true;
+                            ChangeSong();
                         }
-                        
                     }
                 }
             }
@@ -126,8 +109,79 @@ public class PickUpController : MonoBehaviour
         {
             if (pickUpRC)
             {
-                StoreObject(hit.transform.gameObject);
+                shelf.GiveItem(hit.transform.gameObject.name);
+                ShowObject(hit.transform.gameObject, false);
             }
+        }
+    }
+
+    void ChangeSong()
+    {
+        currentSong++;
+        if (SceneManager.GetActiveScene().name == "MainRoom")
+        {
+            if (currentSong > 2)
+            {
+                currentSong = 1;
+            }
+        }
+        else if (SceneManager.GetActiveScene().name == "SecondRoom")
+        {
+            if (currentSong > 3)
+            {
+                currentSong = 1;
+            }
+        }
+
+        foreach (AudioSource audioSource in sources)
+        {
+            GameObject instrument = audioSource.transform.parent.gameObject.transform.parent.gameObject;
+            shelf.RemoveItem(instrument.name);
+            ShowObject(instrument, false);
+        }
+
+        foreach (AudioSource audioSource in sources)
+        {
+            GameObject instrument = audioSource.transform.parent.gameObject.transform.parent.gameObject;
+
+            string nameOfSource = audioSource.name;
+            int songNumber = (int)char.GetNumericValue(nameOfSource[nameOfSource.Length - 1]);
+            if (songNumber == currentSong)
+            {
+                ShowObject(instrument, true);
+                audioSource.enabled = true;
+            }
+            else
+            {
+                audioSource.enabled = false;
+            }
+        }
+        Debug.Log(currentSong);
+    }
+
+    void HeadphonesInteract(GameObject headphonesStand)
+    {
+        GameObject headphones = headphonesStand.transform.GetChild(0).gameObject;
+        MeshRenderer headphonesMesh = headphones.GetComponentInChildren<MeshRenderer>();
+        if (headphonesMesh.enabled)
+        {
+            AudioListener listenerPlayer = GameObject.Find("FirstPersonCamera").GetComponent<AudioListener>();
+            AudioListener listenerMic = GameObject.Find("MicListener").GetComponent<AudioListener>();
+            Canvas headphonesUI = GameObject.Find("Headphones_Canvas").GetComponent<Canvas>();
+            listenerPlayer.enabled = false;
+            listenerMic.enabled = true;
+            headphonesUI.enabled = true;
+            headphonesMesh.enabled = false;
+        }
+        else
+        {
+            AudioListener listenerPlayer = GameObject.Find("FirstPersonCamera").GetComponent<AudioListener>();
+            AudioListener listenerMic = GameObject.Find("MicListener").GetComponent<AudioListener>();
+            Canvas headphonesUI = GameObject.Find("Headphones_Canvas").GetComponent<Canvas>();
+            listenerPlayer.enabled = true;
+            listenerMic.enabled = false;
+            headphonesUI.enabled = false;
+            headphonesMesh.enabled = true;
         }
     }
 
@@ -140,21 +194,23 @@ public class PickUpController : MonoBehaviour
         }
     }
 
-    void StoreObject(GameObject objToStore)
+    void ShowObject(GameObject instrument, bool show)
     {
-        shelf.GiveItem(objToStore.name);
-        objToStore.GetComponent<MeshRenderer>().enabled = false;
-        objToStore.GetComponent<Rigidbody>().isKinematic = false;
-        objToStore.GetComponent<MeshCollider>().enabled = false;
-        AudioSource objAudio = objToStore.GetComponentInChildren<AudioSource>();
-        objAudio.mute = true;
-        if (objToStore.transform.childCount > 1)
+        instrument.GetComponent<MeshRenderer>().enabled = show ? true : false;
+        instrument.GetComponent<Rigidbody>().isKinematic = show ? true : false;
+        instrument.GetComponent<MeshCollider>().enabled = show ? true : false;
+        AudioSource[] objAudio = instrument.GetComponentsInChildren<AudioSource>();
+        foreach (AudioSource audioSource in objAudio)
         {
-            for (int i = 1; i < objToStore.transform.childCount; i++)
+            audioSource.mute = show ? false : true;
+        }
+        if (instrument.transform.childCount > 1)
+        {
+            for (int i = 1; i < instrument.transform.childCount; i++)
             {
-                GameObject stand = objToStore.transform.GetChild(i).gameObject;
-                stand.GetComponent<MeshRenderer>().enabled = false;
-                stand.GetComponent<MeshCollider>().enabled = false;
+                GameObject stand = instrument.transform.GetChild(i).gameObject;
+                stand.GetComponent<MeshRenderer>().enabled = show ? true : false;
+                stand.GetComponent<MeshCollider>().enabled = show ? true : false;
             }
         }
     }
