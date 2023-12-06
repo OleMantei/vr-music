@@ -20,7 +20,6 @@ public class UIShelf : MonoBehaviour
             uIItems.Add(instance.GetComponentInChildren<UIItem>());
             instance.AddComponent<LookAtObject>().mainCamera = m_MainCamera;
         }
-        Debug.Log(uIItems);
     }
 
     public void UpdateSlot(int slot, Item item)

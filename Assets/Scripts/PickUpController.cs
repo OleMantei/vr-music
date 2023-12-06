@@ -95,7 +95,6 @@ public class PickUpController : MonoBehaviour
                         }
                         else if (hit.transform.gameObject.name == "Door_Main"|| hit.transform.gameObject.name == "doorWing")
                         {
-                            Debug.Log("Test");
                             Application.Quit();
                         }
                     }
@@ -161,7 +160,6 @@ public class PickUpController : MonoBehaviour
                 audioSource.enabled = false;
             }
         }
-        Debug.Log(currentSong);
     }
 
     void HeadphonesInteract(GameObject headphonesStand)
