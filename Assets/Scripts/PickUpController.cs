@@ -136,7 +136,7 @@ public class PickUpController : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Store"))
+        if (Input.GetButtonDown("Restart"))
         {
             Debug.Log("test");
             Scene scene = SceneManager.GetActiveScene();
