@@ -135,6 +135,13 @@ public class PickUpController : MonoBehaviour
                 ShowObject(hit.transform.gameObject, false);
             }
         }
+
+        if (Input.GetButtonDown("Restart"))
+        {
+            Debug.Log("test");
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
     }
 
     void ChangeSong()
