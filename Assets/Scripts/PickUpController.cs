@@ -56,7 +56,14 @@ public class PickUpController : MonoBehaviour
                 }
                 else if (hit.transform.gameObject.layer == 6)
                 {
-                    hit.transform.gameObject.GetComponent<Outline>().OutlineColor = new Color(0.3f, 0.8f, 1.0f);
+                    if (hit.transform.gameObject.name == "Door_Main" || hit.transform.gameObject.name == "doorWing")
+                    {
+                        hit.transform.gameObject.GetComponent<Outline>().OutlineColor = Color.red;
+                    }
+                    else
+                    {
+                        hit.transform.gameObject.GetComponent<Outline>().OutlineColor = new Color(0.3f, 0.8f, 1.0f);
+                    }
                 }
                 
                 if (prevHit != null && prevHit != hit.transform.gameObject)
