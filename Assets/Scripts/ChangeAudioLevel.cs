@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.HID;
 
 public class ChangeAudioLevel : MonoBehaviour
 {
-    private float volumeChange = 0.002f;
+    private float volumeChange = 0.01f;
 
     void Update()
     {
