@@ -5430,7 +5430,7 @@ GameObject:
   - component: {fileID: 632106565}
   - component: {fileID: 632106564}
   m_Layer: 0
-  m_Name: audio_source_microphone
+  m_Name: audio_source_microphone_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16000,6 +16000,14 @@ PrefabInstance:
     - target: {fileID: 1579687469576308, guid: db9fb8bf112e6b0458147765e27fc54a, type: 3}
       propertyPath: m_Name
       value: jj_door_4_dark
+      objectReference: {fileID: 0}
+    - target: {fileID: 1579687469576308, guid: db9fb8bf112e6b0458147765e27fc54a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644331683031278, guid: db9fb8bf112e6b0458147765e27fc54a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4236317170969072, guid: db9fb8bf112e6b0458147765e27fc54a, type: 3}
       propertyPath: m_LocalScale.x

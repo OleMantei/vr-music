@@ -50,7 +50,15 @@ public class PickUpController : MonoBehaviour
             if (pickUpRC && hit.transform.gameObject.GetComponent<Outline>() != null)
             {
                 hit.transform.gameObject.GetComponent<Outline>().enabled = true;
-                hit.transform.gameObject.GetComponent<Outline>().OutlineColor = new Color(0.9547f, 0.5077f, 0.0414f);
+                if (hit.transform.gameObject.layer == 3)
+                {
+                    hit.transform.gameObject.GetComponent<Outline>().OutlineColor = new Color(0.9547f, 0.5077f, 0.0414f);
+                }
+                else if (hit.transform.gameObject.layer == 6)
+                {
+                    hit.transform.gameObject.GetComponent<Outline>().OutlineColor = new Color(0.3f, 0.8f, 1.0f);
+                }
+                
                 if (prevHit != null && prevHit != hit.transform.gameObject)
                 {
                     prevHit.GetComponent<Outline>().enabled = false;
